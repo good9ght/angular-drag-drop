@@ -20,7 +20,7 @@ export class MovableDirective extends DraggableDirective {
   }
 
   constructor(private sanitizer: DomSanitizer, public element: ElementRef) {
-    super();
+    super(element);
   }
 
   @HostListener('dragStart', ['$event']) onDragStart(event: PointerEvent) {
@@ -40,9 +40,4 @@ export class MovableDirective extends DraggableDirective {
       this.position = new Position(0, 0);
     }
   }
-
-  get viewRect(): ClientRect {
-    return this.element.nativeElement.getBoundingClientRect();
-  }
-
 }

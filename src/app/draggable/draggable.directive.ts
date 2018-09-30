@@ -1,4 +1,5 @@
-import { Directive, HostListener, HostBinding, Output, EventEmitter } from '@angular/core';
+import { Directive, HostListener, HostBinding, Output, EventEmitter, ContentChild, ElementRef } from '@angular/core';
+import { DraggableHelperDirective } from './draggable-helper.directive';
 
 @Directive({
   selector: '[appDraggable]'
@@ -10,6 +11,8 @@ export class DraggableDirective {
   @Output() dragStart = new EventEmitter();
   @Output() dragMove = new EventEmitter();
   @Output() dragEnd = new EventEmitter();
+
+  constructor(public elementRef: ElementRef) { }
 
   @HostListener('pointerdown', ['$event']) onPointerDown(event: PointerEvent): void {
     event.stopPropagation();
@@ -30,5 +33,9 @@ export class DraggableDirective {
     }
     this.dragging = false;
     this.dragEnd.emit(event);
+  }
+
+  get viewRect(): ClientRect {
+    return this.elementRef.nativeElement.getBoundingClientRect();
   }
 }
