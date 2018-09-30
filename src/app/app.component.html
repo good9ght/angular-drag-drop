@@ -4,7 +4,15 @@
 <h1>Movable</h1>
 <div class="box" appMovable>Box 2</div>
 <h1>Movable Inside Movable</h1>
-<div class="area" appMovable [appMovableReset]="false">
+<div class="box" appMovable [appMovableReset]="false">
   <div class="box" appMovable>Box 4</div>
   <div class="box" appMovable>Box 5</div>
+</div>
+<h1>Moable Area 
+  <button (click)="addBox()">add</button>
+</h1>
+<div class="area" appMovableArea>
+  <div class="box"  
+       *ngFor="let box of boxes"
+       appMovable [appMovableReset]="false">box {{ box }}</div>
 </div>

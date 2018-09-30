@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-drag-drop';
+  boxes = [1, 2];
+
+  addBox(): void {
+    this.boxes.push(this.boxes.length + 1);
+  }
 }

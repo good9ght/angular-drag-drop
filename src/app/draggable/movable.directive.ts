@@ -1,13 +1,13 @@
-import { Directive, HostListener, HostBinding, Input } from '@angular/core';
+import { Directive, HostListener, HostBinding, Input, ElementRef } from '@angular/core';
 import { DraggableDirective } from './draggable.directive';
-import { Position } from './position.model';
+import { Position } from './models/position.model';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 
 @Directive({
   selector: '[appMovable]'
 })
 export class MovableDirective extends DraggableDirective {
-  private position: Position = new Position(0, 0);
+  public position: Position = new Position(0, 0);
   private startPosition: Position = this.position;
 
   // tslint:disable-next-line:no-input-rename
@@ -19,7 +19,7 @@ export class MovableDirective extends DraggableDirective {
     );
   }
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, public element: ElementRef) {
     super();
   }
 
@@ -39,6 +39,10 @@ export class MovableDirective extends DraggableDirective {
     if (this.reset) {
       this.position = new Position(0, 0);
     }
+  }
+
+  get viewRect(): ClientRect {
+    return this.element.nativeElement.getBoundingClientRect();
   }
 
 }

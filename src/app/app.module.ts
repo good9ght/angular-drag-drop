@@ -6,7 +6,7 @@ import { DraggableModule } from './draggable/draggable.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
