@@ -6,9 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  boxes = [1, 2];
-
-  addBox(): void {
-    this.boxes.push(this.boxes.length + 1);
-  }
+  boxes = [
+    'Box 1',
+    'Box 2',
+    'Box 3',
+    'Box 4'
+  ];
 }

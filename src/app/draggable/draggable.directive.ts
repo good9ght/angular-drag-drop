@@ -1,5 +1,4 @@
-import { Directive, HostListener, HostBinding, Output, EventEmitter, ContentChild, ElementRef } from '@angular/core';
-import { DraggableHelperDirective } from './draggable-helper.directive';
+import { Directive, HostListener, HostBinding, Output, EventEmitter, ElementRef } from '@angular/core';
 
 @Directive({
   selector: '[appDraggable]'

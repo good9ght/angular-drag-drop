@@ -1,7 +1,7 @@
 .box {
     background-color: blueviolet;
     border: 1px solid black;
-    display: inline-block;
+    width: 40px;
     padding: 10px 20px;
     margin: 10px;
 }
@@ -12,4 +12,18 @@
     display: inline-block;
     width: 900px;
     margin: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.dragging {
+    background: coral
+}
+
+.sortable.dragging {
+    background: none;
+    border: 1px dashed black;
+    color: transparent;
 }
