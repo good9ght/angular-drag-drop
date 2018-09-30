@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+.draggable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.dragging {
+    cursor: move
+}
+
+.movable:not(.dragging) {
+    transition: transform 300ms ease-in-out
+}
