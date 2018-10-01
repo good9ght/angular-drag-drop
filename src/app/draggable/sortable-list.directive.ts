@@ -1,13 +1,13 @@
-import { Directive, ContentChildren, QueryList, AfterContentInit, Output } from '@angular/core';
+import { Directive, ContentChildren, QueryList, AfterContentInit, Output, EventEmitter } from '@angular/core';
 import { SortableDirective } from './sortable.directive';
-import { EventEmitter } from 'protractor';
+import { SortEvent } from './models/sort-event.modal';
 
 @Directive({
   selector: '[appSortableList]'
 })
 export class SortableListDirective implements AfterContentInit {
   @ContentChildren(SortableDirective) sortables: QueryList<(SortableDirective)>;
-  @Output() sort = new EventEmitter();
+  @Output() sort = new EventEmitter<SortEvent>();
 
   private clientRects: ClientRect[];
 
@@ -30,9 +30,16 @@ export class SortableListDirective implements AfterContentInit {
 
     if (prevRect && event.clientY < prevRect.top + prevRect.height / 2) {
       // Move Back
-      console.log('Move Back');
+      this.sort.emit(new SortEvent(
+        currentIndex,
+        currentIndex - 1
+      ));
     } else if (nextRect && event.clientY > nextRect.top + nextRect.height / 2) {
       // Move Forward
+      this.sort.emit(new SortEvent(
+        currentIndex,
+        currentIndex + 1
+      ));
       console.log('Move Forward');
     }
   }

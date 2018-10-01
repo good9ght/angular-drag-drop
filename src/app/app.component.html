@@ -1,6 +1,6 @@
 <h1>List</h1>
 
-<ul appSortableList>
+<ul appSortableList (sort)="sort($event)">
   <li class="box" *ngFor="let box of boxes" appSortable>
     {{ box }}
     <div class="box" *appDraggableHelper>{{ box }}</div>

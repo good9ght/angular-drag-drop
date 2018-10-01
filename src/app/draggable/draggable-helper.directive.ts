@@ -39,11 +39,17 @@ export class DraggableHelperDirective implements OnInit, OnDestroy {
       event.clientX - this.draggable.viewRect.left,
       event.clientY - this.draggable.viewRect.top
     );
+
+    this.overlayRef.overlayElement.style.width = `${this.draggable.viewRect.width}px`;
   }
 
   private onDragMove(event: PointerEvent): void {
     if (!this.overlayRef.hasAttached()) {
       this.overlayRef.attach(new TemplatePortal(this.templateRef, this.viewContainerRef));
+
+      const rootElement = this.overlayRef.overlayElement.firstChild as HTMLElement;
+      rootElement.style.width = '100%';
+      rootElement.style.boxSizing = 'border-box';
     }
     this.positionStrategy.left(`${event.clientX - this.startPosition.x}px`);
     this.positionStrategy.top(`${event.clientY - this.startPosition.y}px`);

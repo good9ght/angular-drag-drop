@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SortEvent } from './draggable/models/sort-event.modal';
 
 @Component({
   selector: 'app-root',
@@ -12,4 +13,12 @@ export class AppComponent {
     'Box 3',
     'Box 4'
   ];
+
+  sort(event: SortEvent) {
+    const current = this.boxes[event.currentIndex];
+    const swapWith = this.boxes[event.newIndex];
+
+    this.boxes[event.newIndex] = current;
+    this.boxes[event.currentIndex] = swapWith;
+  }
 }
