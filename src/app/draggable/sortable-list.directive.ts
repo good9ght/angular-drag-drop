@@ -24,23 +24,43 @@ export class SortableListDirective implements AfterContentInit {
 
   private detectSorting(sortable: SortableDirective, event: PointerEvent): any {
     const currentIndex = this.sortables.toArray().indexOf(sortable);
+    const currentRect = this.clientRects[currentIndex];
 
-    const prevRect = currentIndex > 0 ? this.clientRects[currentIndex - 1] : undefined;
-    const nextRect = currentIndex < this.clientRects.length - 1 ? this.clientRects[currentIndex + 1] : undefined;
+    this.clientRects
+      .slice()
+      .sort((rectA, rectB) => this.distance(rectA, currentRect) - this.distance(rectB, currentRect))
+      .forEach(rect => {
+        if (rect === currentRect) {
+          return false;
+        }
 
-    if (prevRect && event.clientY < prevRect.top + prevRect.height / 2) {
-      // Move Back
-      this.sort.emit(new SortEvent(
-        currentIndex,
-        currentIndex - 1
-      ));
-    } else if (nextRect && event.clientY > nextRect.top + nextRect.height / 2) {
-      // Move Forward
-      this.sort.emit(new SortEvent(
-        currentIndex,
-        currentIndex + 1
-      ));
-      console.log('Move Forward');
-    }
+        const isHorizontal = rect.top === currentRect.top;
+        const isBefore = isHorizontal ? rect.left < currentRect.left : rect.top < currentRect.top;
+
+        let moveForward = false;
+        let moveBack = false;
+
+        if (isHorizontal) {
+          moveBack = isBefore && event.clientX < rect.left + rect.width / 2;
+          moveForward = !isBefore && event.clientX > rect.left + rect.width / 2;
+        } else {
+          moveBack = isBefore && event.clientY < rect.top + rect.height / 2;
+          moveForward = !isBefore && event.clientY > rect.top + rect.height / 2;
+        }
+
+        if (moveBack || moveForward) {
+          this.sort.emit(new SortEvent(currentIndex, this.clientRects.indexOf(rect)));
+          return true;
+        }
+
+        return false;
+      });
+  }
+
+  private distance(a: ClientRect, b: ClientRect): number {
+    return Math.sqrt(
+      Math.pow(b.top - a.top, 2) +
+      Math.pow(b.left - a.left, 2)
+    );
   }
 }

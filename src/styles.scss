@@ -3,12 +3,14 @@
 @include cdk-overlay();
 
 .draggable {
-    cursor: pointer;
+    cursor: grab;
+    cursor: -webkit-grab;
     user-select: none;
 }
 
 .dragging {
-    cursor: move
+    cursor: -webkit-grabbing; 
+    cursor: grabbing;
 }
 
 .movable:not(.dragging) {

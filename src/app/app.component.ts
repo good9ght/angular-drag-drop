@@ -11,14 +11,20 @@ export class AppComponent {
     'Box 1',
     'Box 2',
     'Box 3',
-    'Box 4'
+    'Box 4',
+    'Box 5',
+    'Box 6',
+    'Box 7',
+    'Box 8',
+    'Box 9',
+    'Box 10',
   ];
 
   sort(event: SortEvent) {
     const current = this.boxes[event.currentIndex];
-    const swapWith = this.boxes[event.newIndex];
+    const newIndex = this.boxes[event.newIndex];
 
     this.boxes[event.newIndex] = current;
-    this.boxes[event.currentIndex] = swapWith;
+    this.boxes[event.currentIndex] = newIndex;
   }
 }
