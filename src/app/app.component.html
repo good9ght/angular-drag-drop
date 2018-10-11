@@ -1,4 +1,4 @@
-<h1>Vertical List</h1>
+<!-- <h1>Vertical List</h1>
 
 <ul appSortableList (sort)="sort($event)">
   <li class="box" *ngFor="let box of boxes" appSortable>
@@ -13,4 +13,28 @@
     {{ box }}
     <div class="box" *appDraggableHelper>{{ box }}</div>
   </li>
-</ul>
+</ul> -->
+
+<div class="container">
+  <div class="columns">
+    <div class="column">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th><abbr title="Opa">teste</abbr></th>
+          </tr>
+        </thead>
+        <tbody appSortableList (sort)="sort($event)" class="horizontal">
+          <tr appSortable *ngFor="let box of boxes">
+            <td>
+              {{ box }}
+              <div *appDraggableHelper>
+                {{ box }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
